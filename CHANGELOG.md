@@ -40,6 +40,10 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Renamed plugin to Felmivo Checkout Builder for WooCommerce (slug and text domain: `felmivo-checkout-builder`) following WordPress.org review feedback.
 - Added `Requires Plugins: woocommerce` plugin header for WordPress.org review compliance.
+- Shortened WooCommerce submenu label to "Felmivo Checkout".
+- Improved HPOS compatibility declaration with standalone autoloader fallback.
+- Added conditional required validation support for WooCommerce Block Checkout.
+- Added administrator notice when WooCommerce is inactive.
 
 ### Security
 - Sanitized order admin nonce value with `sanitize_text_field()` prior to verification.

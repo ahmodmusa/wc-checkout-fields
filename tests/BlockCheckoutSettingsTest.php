@@ -117,6 +117,128 @@ final class BlockCheckoutSettingsTest extends TestCase {
 		);
 	}
 
+	public function testConditionalRequiredFieldRegistersAsNonRequiredForBlocksApi(): void {
+		$field = FieldFactory::create(
+			'gift_msg',
+			'Gift Message',
+			FieldType::TEXT,
+			true,
+			'',
+			'',
+			array(),
+			'',
+			array(),
+			array(
+				'field'    => 'is_gift',
+				'operator' => 'equals',
+				'value'    => '1',
+			)
+		);
+
+		$settings = $this->settings( $field );
+		$this->assertSame( 'scfw/gift_msg', $settings['id'] );
+		$this->assertFalse( $settings['required'], 'Conditional required fields must register as false at the Blocks API level to allow conditional location evaluation.' );
+	}
+
+	public function testUnconditionalRequiredFieldRegistersAsRequired(): void {
+		$field = FieldFactory::create(
+			'instructions',
+			'Instructions',
+			FieldType::TEXT,
+			true
+		);
+
+		$settings = $this->settings( $field );
+		$this->assertTrue( $settings['required'] );
+	}
+
+	public function testValidateFieldBypassesEmptyCheckWhenFieldIsConditional(): void {
+		$block = new BlockCheckout();
+		$field = array( 'id' => 'scfw/test_field' );
+
+		// Configure test field with condition and required in FieldRepository options.
+		$GLOBALS['scfw_test_options'] = array(
+			'scfw_options' => array(
+				'enabled' => 1,
+				'fields'  => array(
+					array(
+						'id'         => 'test_field',
+						'label'      => 'Test Field',
+						'type'       => 'text',
+						'required'   => true,
+						'enabled'    => true,
+						'conditions' => array(
+							'field'    => 'trigger',
+							'operator' => 'equals',
+							'value'    => '1',
+						),
+					),
+				),
+			),
+		);
+
+		$result = $block->validateField( '', $field );
+		$this->assertTrue( $result, 'Empty value must pass validateField for conditional fields so validateConditionalFields can evaluate in location context.' );
+	}
+
+	public function testValidateConditionalFieldsEnforcesRequiredWhenConditionIsMet(): void {
+		$block = new BlockCheckout();
+
+		$GLOBALS['scfw_test_options'] = array(
+			'scfw_options' => array(
+				'enabled' => 1,
+				'fields'  => array(
+					array(
+						'id'         => 'trigger',
+						'label'      => 'Trigger',
+						'type'       => 'checkbox',
+						'required'   => false,
+						'enabled'    => true,
+					),
+					array(
+						'id'         => 'gift_msg',
+						'label'      => 'Gift Message',
+						'type'       => 'text',
+						'required'   => true,
+						'enabled'    => true,
+						'conditions' => array(
+							'field'    => 'trigger',
+							'operator' => 'equals',
+							'value'    => '1',
+						),
+					),
+				),
+			),
+		);
+
+		// Case A: Trigger is 1, gift_msg is empty -> Error expected
+		$errors_a = new \WP_Error();
+		$fields_a = array(
+			'scfw/trigger'  => '1',
+			'scfw/gift_msg' => '',
+		);
+		$block->validateConditionalFields( $errors_a, $fields_a, 'other' );
+		$this->assertContains( 'woocommerce_required_checkout_field', $errors_a->get_error_codes() );
+
+		// Case B: Trigger is 0, gift_msg is empty -> No error expected
+		$errors_b = new \WP_Error();
+		$fields_b = array(
+			'scfw/trigger'  => '0',
+			'scfw/gift_msg' => '',
+		);
+		$block->validateConditionalFields( $errors_b, $fields_b, 'other' );
+		$this->assertEmpty( $errors_b->get_error_codes() );
+
+		// Case C: Trigger is 1, gift_msg is filled -> No error expected
+		$errors_c = new \WP_Error();
+		$fields_c = array(
+			'scfw/trigger'  => '1',
+			'scfw/gift_msg' => 'Special surprise!',
+		);
+		$block->validateConditionalFields( $errors_c, $fields_c, 'other' );
+		$this->assertEmpty( $errors_c->get_error_codes() );
+	}
+
 	public function testOptionalRadioMapsToNativeSelectWithOptions(): void {
 		$settings = $this->settings(
 			FieldFactory::create( 'shade', 'Shade', FieldType::RADIO, false, '', '', array( 'Light', 'Dark' ) )

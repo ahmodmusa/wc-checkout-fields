@@ -43,6 +43,29 @@ final class WooCommerceChecker {
 			return;
 		}
 
-		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', SCFW_FILE, true );
+		$plugin_file = defined( 'SCFW_FILE' ) ? SCFW_FILE : dirname( __DIR__, 2 ) . '/felmivo-checkout-builder.php';
+
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $plugin_file, true );
+	}
+
+	/**
+	 * Render an administrator notice when WooCommerce is not active.
+	 *
+	 * @since 0.0.2
+	 *
+	 * @return void
+	 */
+	public static function renderMissingNotice(): void {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+		?>
+		<div class="notice notice-error">
+			<p>
+				<strong><?php esc_html_e( 'Felmivo Checkout Builder for WooCommerce', 'felmivo-checkout-builder' ); ?></strong>:
+				<?php esc_html_e( 'This plugin requires WooCommerce to be installed and active.', 'felmivo-checkout-builder' ); ?>
+			</p>
+		</div>
+		<?php
 	}
 }

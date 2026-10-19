@@ -188,6 +188,10 @@ final class BlockCheckout {
 			return true;
 		}
 
+		if ( $core->hasConditions() && ( '' === $value || null === $value ) ) {
+			return true;
+		}
+
 		$result = $this->validator->validate( $core, $value );
 
 		if ( $result->isValid() ) {
@@ -201,6 +205,55 @@ final class BlockCheckout {
 		}
 
 		return $errors;
+	}
+
+	/**
+	 * Validate conditional required fields in the context of all submitted location fields.
+	 *
+	 * Hooked to woocommerce_blocks_validate_location_order_fields.
+	 *
+	 * @since 0.0.2
+	 *
+	 * @param \WP_Error            $errors Error collection.
+	 * @param array<string, mixed> $fields All submitted fields in this location.
+	 * @param string               $group  Location group name.
+	 *
+	 * @return void
+	 */
+	public function validateConditionalFields( \WP_Error $errors, array $fields, string $group ): void {
+		$config = FieldRepository::config();
+
+		$field_values = array();
+		foreach ( $fields as $key => $val ) {
+			$raw_key                  = str_starts_with( $key, self::FIELD_NAMESPACE . '/' )
+				? substr( $key, strlen( self::FIELD_NAMESPACE . '/' ) )
+				: $key;
+			$field_values[ $raw_key ] = $val;
+		}
+
+		foreach ( FieldRepository::get() as $field ) {
+			if ( ! $field->hasConditions() || ! $field->getRequired() ) {
+				continue;
+			}
+
+			if ( ! FieldVisibility::isVisible( $field->getId(), $config[ $field->getId() ] ?? array(), $field_values ) ) {
+				continue;
+			}
+
+			$raw_value = $field_values[ $field->getId() ] ?? '';
+			$sanitized = $this->validator->sanitize( $field, $raw_value );
+			$result    = $this->validator->validate( $field, $sanitized );
+
+			if ( ! $result->isValid() ) {
+				foreach ( $result->getErrors() as $error ) {
+					$errors->add(
+						'woocommerce_required_checkout_field',
+						$error->getMessage(),
+						array( 'key' => $this->blockId( $field ) )
+					);
+				}
+			}
+		}
 	}
 
 	/**
@@ -282,7 +335,7 @@ final class BlockCheckout {
 			'optionalLabel'     => $field->getLabel(),
 			'location'          => self::LOCATION,
 			'type'              => $this->blockType( $field ),
-			'required'          => $field->getRequired(),
+			'required'          => ! $field->hasConditions() && $field->getRequired(),
 			'sanitize_callback' => array( $this, 'sanitizeField' ),
 			'validate_callback' => array( $this, 'validateField' ),
 		);

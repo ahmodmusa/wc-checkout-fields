@@ -33,7 +33,7 @@ final class AdminMenu {
 	/**
 	 * Register the plugin admin menu under WooCommerce.
 	 *
-	 * Only a single "Checkout Fields for WooCommerce" entry is registered under
+	 * Only a single "Felmivo Checkout" entry is registered under
 	 * the WooCommerce menu. Fields, Settings, and Import / Export are navigated
 	 * seamlessly as internal tabs within this single admin screen.
 	 *
@@ -44,7 +44,7 @@ final class AdminMenu {
 	public static function register(): void {
 		self::$page_hooks = array();
 
-		// Primary entry under WooCommerce -> Checkout Fields for WooCommerce.
+		// Primary entry under WooCommerce -> Felmivo Checkout.
 		$hook = add_submenu_page(
 			'woocommerce',
 			__( 'Felmivo Checkout Builder for WooCommerce', 'felmivo-checkout-builder' ),

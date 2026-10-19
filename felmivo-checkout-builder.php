@@ -30,6 +30,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
+} else {
+	spl_autoload_register(
+		static function ( string $class ): void {
+			$prefix = 'SCFW\\';
+			$len    = strlen( $prefix );
+			if ( 0 !== strncmp( $prefix, $class, $len ) ) {
+				return;
+			}
+
+			$relative_class = substr( $class, $len );
+			$file           = __DIR__ . '/src/' . str_replace( '\\', '/', $relative_class ) . '.php';
+
+			if ( file_exists( $file ) ) {
+				require_once $file;
+			}
+		}
+	);
 }
 
 define( 'SCFW_VERSION', '0.0.2' );

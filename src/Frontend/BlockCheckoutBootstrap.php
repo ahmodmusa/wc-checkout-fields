@@ -38,6 +38,7 @@ final class BlockCheckoutBootstrap {
 
 		add_action( 'woocommerce_init', array( $block, 'registerField' ) );
 		add_action( 'wp_enqueue_scripts', array( $block, 'enqueueBlockAssets' ) );
+		add_action( 'woocommerce_blocks_validate_location_order_fields', array( $block, 'validateConditionalFields' ), 10, 3 );
 		add_action( 'woocommerce_store_api_checkout_update_order_from_request', array( $block, 'saveFields' ), 10, 2 );
 	}
 }
