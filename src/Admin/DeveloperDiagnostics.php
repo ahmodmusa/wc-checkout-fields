@@ -52,11 +52,11 @@ final class DeveloperDiagnostics {
 	 */
 	public static function destinationLabels(): array {
 		return array(
-			FieldDestination::ADMIN_ORDER->value    => __( 'Admin Order', 'checkout-fields-for-woocommerce' ),
-			FieldDestination::THANK_YOU->value      => __( 'Thank You', 'checkout-fields-for-woocommerce' ),
-			FieldDestination::MY_ACCOUNT->value     => __( 'My Account', 'checkout-fields-for-woocommerce' ),
-			FieldDestination::CUSTOMER_EMAIL->value => __( 'Customer Email', 'checkout-fields-for-woocommerce' ),
-			FieldDestination::ADMIN_EMAIL->value    => __( 'Admin Email', 'checkout-fields-for-woocommerce' ),
+			FieldDestination::ADMIN_ORDER->value    => __( 'Admin Order', 'felmivo-checkout-builder' ),
+			FieldDestination::THANK_YOU->value      => __( 'Thank You', 'felmivo-checkout-builder' ),
+			FieldDestination::MY_ACCOUNT->value     => __( 'My Account', 'felmivo-checkout-builder' ),
+			FieldDestination::CUSTOMER_EMAIL->value => __( 'Customer Email', 'felmivo-checkout-builder' ),
+			FieldDestination::ADMIN_EMAIL->value    => __( 'Admin Email', 'felmivo-checkout-builder' ),
 		);
 	}
 
@@ -91,7 +91,7 @@ final class DeveloperDiagnostics {
 		$conditions = isset( $field['conditions'] ) && is_array( $field['conditions'] ) ? $field['conditions'] : null;
 
 		if ( empty( $conditions ) || empty( $conditions['field'] ) ) {
-			return __( 'None', 'checkout-fields-for-woocommerce' );
+			return __( 'None', 'felmivo-checkout-builder' );
 		}
 
 		$parent   = (string) $conditions['field'];

@@ -35,6 +35,15 @@ All notable changes to this project will be documented in this file.
 - Configured PHPCS to match the frozen PSR-4/PSR-12 architecture rather than forcing legacy WordPress naming conventions.
 - Updated README and CHANGELOG to describe the implemented foundations.
 
+## [0.0.2] - 2026-10-19
+
+### Changed
+- Renamed plugin to Felmivo Checkout Builder for WooCommerce (slug and text domain: `felmivo-checkout-builder`) following WordPress.org review feedback.
+- Added `Requires Plugins: woocommerce` plugin header for WordPress.org review compliance.
+
+### Security
+- Sanitized order admin nonce value with `sanitize_text_field()` prior to verification.
+
 ## [0.0.1] - 2026-08-04
 
 ### Added

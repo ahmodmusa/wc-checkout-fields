@@ -47,8 +47,8 @@ final class AdminMenu {
 		// Primary entry under WooCommerce -> Checkout Fields for WooCommerce.
 		$hook = add_submenu_page(
 			'woocommerce',
-			__( 'Checkout Fields for WooCommerce', 'checkout-fields-for-woocommerce' ),
-			__( 'Checkout Fields for WooCommerce', 'checkout-fields-for-woocommerce' ),
+			__( 'Felmivo Checkout Builder for WooCommerce', 'felmivo-checkout-builder' ),
+			__( 'Felmivo Checkout Builder for WooCommerce', 'felmivo-checkout-builder' ),
 			'manage_options',
 			'scfw-fields',
 			array( self::class, 'renderPage' )
@@ -134,8 +134,8 @@ final class AdminMenu {
 		<header class="scfw-app-header">
 			<div class="scfw-app-header__main">
 				<div class="scfw-app-header__title-group">
-					<h1 class="scfw-app-title"><?php echo esc_html__( 'Checkout Fields', 'checkout-fields-for-woocommerce' ); ?></h1>
-					<p class="scfw-app-subtitle"><?php esc_html_e( 'Create, manage and display custom fields on your WooCommerce checkout.', 'checkout-fields-for-woocommerce' ); ?></p>
+					<h1 class="scfw-app-title"><?php echo esc_html__( 'Checkout Fields', 'felmivo-checkout-builder' ); ?></h1>
+					<p class="scfw-app-subtitle"><?php esc_html_e( 'Create, manage and display custom fields on your WooCommerce checkout.', 'felmivo-checkout-builder' ); ?></p>
 				</div>
 				<?php if ( $show_add_btn ) : ?>
 					<div class="scfw-app-header__actions">
@@ -145,28 +145,28 @@ final class AdminMenu {
 								<line x1="3" y1="9" x2="21" y2="9"></line>
 								<line x1="9" y1="21" x2="9" y2="9"></line>
 							</svg>
-							<?php esc_html_e( 'Browse Templates', 'checkout-fields-for-woocommerce' ); ?>
+							<?php esc_html_e( 'Browse Templates', 'felmivo-checkout-builder' ); ?>
 						</button>
 						<button type="button" class="button button-primary scfw-btn-primary scfw-trigger-add-field" id="scfw-top-add-btn">
 							<svg class="scfw-btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 								<line x1="12" y1="5" x2="12" y2="19"></line>
 								<line x1="5" y1="12" x2="19" y2="12"></line>
 							</svg>
-							<?php esc_html_e( 'Add New Field', 'checkout-fields-for-woocommerce' ); ?>
+							<?php esc_html_e( 'Add New Field', 'felmivo-checkout-builder' ); ?>
 						</button>
 					</div>
 				<?php endif; ?>
 			</div>
 
-			<nav class="scfw-nav-tabs" aria-label="<?php esc_attr_e( 'Checkout Fields Navigation', 'checkout-fields-for-woocommerce' ); ?>">
+			<nav class="scfw-nav-tabs" aria-label="<?php esc_attr_e( 'Checkout Fields Navigation', 'felmivo-checkout-builder' ); ?>">
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=scfw-fields' ) ); ?>" class="scfw-nav-tab <?php echo 'fields' === $active_tab ? 'is-active' : ''; ?>">
-					<?php esc_html_e( 'Fields', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Fields', 'felmivo-checkout-builder' ); ?>
 				</a>
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=scfw-fields&tab=settings' ) ); ?>" class="scfw-nav-tab <?php echo 'settings' === $active_tab ? 'is-active' : ''; ?>">
-					<?php esc_html_e( 'Settings', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Settings', 'felmivo-checkout-builder' ); ?>
 				</a>
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=scfw-fields&tab=transfer' ) ); ?>" class="scfw-nav-tab <?php echo 'transfer' === $active_tab ? 'is-active' : ''; ?>">
-					<?php esc_html_e( 'Import / Export', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Import / Export', 'felmivo-checkout-builder' ); ?>
 				</a>
 			</nav>
 		</header>
@@ -238,17 +238,17 @@ final class AdminMenu {
 					<?php
 					settings_fields( 'scfw' );
 					do_settings_sections( 'scfw-settings' );
-					submit_button( __( 'Save Settings', 'checkout-fields-for-woocommerce' ), 'primary scfw-btn-primary' );
+					submit_button( __( 'Save Settings', 'felmivo-checkout-builder' ), 'primary scfw-btn-primary' );
 					?>
 				</form>
 			</div>
 
 			<section class="scfw-card scfw-compatibility-card" aria-labelledby="scfw-compatibility-title">
 				<h2 class="scfw-card-title" id="scfw-compatibility-title">
-					<?php esc_html_e( 'Compatibility', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Compatibility', 'felmivo-checkout-builder' ); ?>
 				</h2>
 				<p class="scfw-card-desc">
-					<?php esc_html_e( 'Checkout Fields for WooCommerce is built to work with modern WooCommerce checkout and order systems.', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Felmivo Checkout Builder for WooCommerce is built to work with modern WooCommerce checkout and order systems.', 'felmivo-checkout-builder' ); ?>
 				</p>
 
 				<div class="scfw-compatibility-grid">
@@ -256,66 +256,66 @@ final class AdminMenu {
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'Classic Checkout', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'Classic Checkout', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce Checkout Block', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce Checkout Block', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'HPOS (High-Performance Order Storage)', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'HPOS (High-Performance Order Storage)', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'Guest Checkout', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'Guest Checkout', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'Logged-in Customer Checkout', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'Logged-in Customer Checkout', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce Order Admin', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce Order Admin', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'Thank You Page', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'Thank You Page', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'My Account Orders', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'My Account Orders', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce Emails', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce Emails', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 					<div class="scfw-compatibility-item">
 						<span class="scfw-compat-icon" aria-hidden="true">
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 						</span>
-						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce REST API', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-compat-label"><?php esc_html_e( 'WooCommerce REST API', 'felmivo-checkout-builder' ); ?></span>
 					</div>
 				</div>
 
 				<p class="scfw-compatibility-note">
-					<?php esc_html_e( 'Custom checkout field data is stored using WooCommerce-compatible order metadata and is designed to support both legacy order storage and HPOS.', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Custom checkout field data is stored using WooCommerce-compatible order metadata and is designed to support both legacy order storage and HPOS.', 'felmivo-checkout-builder' ); ?>
 				</p>
 			</section>
 		</div>

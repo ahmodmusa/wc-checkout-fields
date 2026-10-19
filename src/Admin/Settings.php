@@ -63,7 +63,7 @@ final class Settings {
 
 		add_settings_section(
 			'scfw_general',
-			__( 'General Settings', 'checkout-fields-for-woocommerce' ),
+			__( 'General Settings', 'felmivo-checkout-builder' ),
 			'',
 			'scfw-settings'
 		);
@@ -144,7 +144,7 @@ final class Settings {
 				add_settings_error(
 					'scfw',
 					'fields_invalid',
-					__( 'The checkout field configuration was invalid and was not saved.', 'checkout-fields-for-woocommerce' ),
+					__( 'The checkout field configuration was invalid and was not saved.', 'felmivo-checkout-builder' ),
 					'error'
 				);
 				$clean['fields'] = isset( $current['fields'] ) && is_array( $current['fields'] ) ? $current['fields'] : array();
@@ -205,10 +205,10 @@ final class Settings {
 			<input type="hidden" name="scfw_options[enabled]" value="0" />
 			<input type="checkbox" class="scfw-switch__input" id="scfw_enabled" name="scfw_options[enabled]" value="1" <?php checked( ! empty( $options['enabled'] ), true ); ?> />
 			<span class="scfw-switch__track" aria-hidden="true"><span class="scfw-switch__thumb"></span></span>
-			<span class="scfw-switch__title"><?php esc_html_e( 'Enable Checkout Fields', 'checkout-fields-for-woocommerce' ); ?></span>
+			<span class="scfw-switch__title"><?php esc_html_e( 'Enable Checkout Fields', 'felmivo-checkout-builder' ); ?></span>
 		</label>
 		<p class="description scfw-switch-copy">
-			<?php esc_html_e( 'When enabled, custom fields appear during checkout. When disabled, custom fields are not shown at checkout but the configuration is preserved.', 'checkout-fields-for-woocommerce' ); ?>
+			<?php esc_html_e( 'When enabled, custom fields appear during checkout. When disabled, custom fields are not shown at checkout but the configuration is preserved.', 'felmivo-checkout-builder' ); ?>
 		</p>
 		<?php
 	}
@@ -228,10 +228,10 @@ final class Settings {
 			<input type="hidden" name="scfw_options[developer_diagnostics]" value="0" />
 			<input type="checkbox" class="scfw-switch__input" id="scfw_developer_diagnostics" name="scfw_options[developer_diagnostics]" value="1" <?php checked( ! empty( $options['developer_diagnostics'] ), true ); ?> />
 			<span class="scfw-switch__track" aria-hidden="true"><span class="scfw-switch__thumb"></span></span>
-			<span class="scfw-switch__title"><?php esc_html_e( 'Developer Diagnostics', 'checkout-fields-for-woocommerce' ); ?></span>
+			<span class="scfw-switch__title"><?php esc_html_e( 'Developer Diagnostics', 'felmivo-checkout-builder' ); ?></span>
 		</label>
 		<p class="description scfw-switch-copy">
-			<?php esc_html_e( 'Show technical field identifiers, storage keys, and lifecycle details in the Field Builder.', 'checkout-fields-for-woocommerce' ); ?>
+			<?php esc_html_e( 'Show technical field identifiers, storage keys, and lifecycle details in the Field Builder.', 'felmivo-checkout-builder' ); ?>
 		</p>
 		<?php
 	}

@@ -68,7 +68,7 @@ final class CheckoutHealth {
 			$type    = isset( $field['type'] ) && is_scalar( $field['type'] ) ? (string) $field['type'] : '';
 			$enabled = ! empty( $field['enabled'] );
 
-			$display_label = '' !== $label ? $label : ( '' !== $id ? $id : __( 'Untitled Field', 'checkout-fields-for-woocommerce' ) );
+			$display_label = '' !== $label ? $label : ( '' !== $id ? $id : __( 'Untitled Field', 'felmivo-checkout-builder' ) );
 
 			// Rule 1: Missing Label (for enabled fields).
 			if ( $enabled && '' === $label ) {
@@ -79,10 +79,10 @@ final class CheckoutHealth {
 					'field_label' => $display_label,
 					'message'     => sprintf(
 						/* translators: %s is field identifier */
-						__( 'Field "%s" has an empty label.', 'checkout-fields-for-woocommerce' ),
+						__( 'Field "%s" has an empty label.', 'felmivo-checkout-builder' ),
 						$display_label
 					),
-					'suggestion'  => __( 'Provide a clear label so customers know what to enter during checkout.', 'checkout-fields-for-woocommerce' ),
+					'suggestion'  => __( 'Provide a clear label so customers know what to enter during checkout.', 'felmivo-checkout-builder' ),
 				);
 			}
 
@@ -104,11 +104,11 @@ final class CheckoutHealth {
 						'field_label' => $display_label,
 						'message'     => sprintf(
 							/* translators: 1: field label, 2: field type */
-							__( 'This %2$s field "%1$s" has no options configured.', 'checkout-fields-for-woocommerce' ),
+							__( 'This %2$s field "%1$s" has no options configured.', 'felmivo-checkout-builder' ),
 							$display_label,
 							$type
 						),
-						'suggestion'  => __( 'Add at least one choice option so customers can select a value.', 'checkout-fields-for-woocommerce' ),
+						'suggestion'  => __( 'Add at least one choice option so customers can select a value.', 'felmivo-checkout-builder' ),
 					);
 				}
 			}
@@ -125,10 +125,10 @@ final class CheckoutHealth {
 						'field_label' => $display_label,
 						'message'     => sprintf(
 							/* translators: %s is field label */
-							__( 'Condition on field "%s" is malformed.', 'checkout-fields-for-woocommerce' ),
+							__( 'Condition on field "%s" is malformed.', 'felmivo-checkout-builder' ),
 							$display_label
 						),
-						'suggestion'  => __( 'Re-save the condition settings or clear the condition.', 'checkout-fields-for-woocommerce' ),
+						'suggestion'  => __( 'Re-save the condition settings or clear the condition.', 'felmivo-checkout-builder' ),
 					);
 					continue;
 				}
@@ -150,10 +150,10 @@ final class CheckoutHealth {
 						'field_label' => $display_label,
 						'message'     => sprintf(
 							/* translators: %s is field label */
-							__( 'Field "%s" has a condition referencing itself.', 'checkout-fields-for-woocommerce' ),
+							__( 'Field "%s" has a condition referencing itself.', 'felmivo-checkout-builder' ),
 							$display_label
 						),
-						'suggestion'  => __( 'Select a different controlling field or remove the condition.', 'checkout-fields-for-woocommerce' ),
+						'suggestion'  => __( 'Select a different controlling field or remove the condition.', 'felmivo-checkout-builder' ),
 					);
 					continue;
 				}
@@ -167,11 +167,11 @@ final class CheckoutHealth {
 						'field_label' => $display_label,
 						'message'     => sprintf(
 							/* translators: 1: field label, 2: missing controller field id */
-							__( 'Condition on "%1$s" references missing field "%2$s".', 'checkout-fields-for-woocommerce' ),
+							__( 'Condition on "%1$s" references missing field "%2$s".', 'felmivo-checkout-builder' ),
 							$display_label,
 							$controller
 						),
-						'suggestion'  => __( 'Update the controlling field or remove the condition.', 'checkout-fields-for-woocommerce' ),
+						'suggestion'  => __( 'Update the controlling field or remove the condition.', 'felmivo-checkout-builder' ),
 					);
 					continue;
 				}
@@ -185,11 +185,11 @@ final class CheckoutHealth {
 						'field_label' => $display_label,
 						'message'     => sprintf(
 							/* translators: 1: field label, 2: invalid operator */
-							__( 'Condition on "%1$s" uses unsupported operator "%2$s".', 'checkout-fields-for-woocommerce' ),
+							__( 'Condition on "%1$s" uses unsupported operator "%2$s".', 'felmivo-checkout-builder' ),
 							$display_label,
 							$operator
 						),
-						'suggestion'  => __( 'Select a valid operator such as "equals" or "not_equals".', 'checkout-fields-for-woocommerce' ),
+						'suggestion'  => __( 'Select a valid operator such as "equals" or "not_equals".', 'felmivo-checkout-builder' ),
 					);
 				}
 			}

@@ -184,7 +184,7 @@ final class FieldTemplateRepository {
 	 */
 	public static function handleApply(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to modify checkout fields.', 'checkout-fields-for-woocommerce' ) );
+			wp_die( esc_html__( 'You do not have permission to modify checkout fields.', 'felmivo-checkout-builder' ) );
 		}
 
 		check_admin_referer( 'scfw_apply_template' );
@@ -193,16 +193,16 @@ final class FieldTemplateRepository {
 		$template_id = isset( $_POST['template_id'] ) && is_scalar( $_POST['template_id'] ) ? sanitize_key( (string) $_POST['template_id'] ) : '';
 
 		if ( '' === $template_id || ! self::applyTemplate( $template_id ) ) {
-			add_settings_error( 'scfw', 'template_apply_failed', __( 'Could not apply template pack.', 'checkout-fields-for-woocommerce' ), 'error' );
+			add_settings_error( 'scfw', 'template_apply_failed', __( 'Could not apply template pack.', 'felmivo-checkout-builder' ), 'error' );
 		} else {
 			$template = self::get( $template_id );
-			$title    = $template['title'] ?? __( 'Template', 'checkout-fields-for-woocommerce' );
+			$title    = $template['title'] ?? __( 'Template', 'felmivo-checkout-builder' );
 			add_settings_error(
 				'scfw',
 				'template_applied',
 				sprintf(
 					/* translators: %s is template name */
-					__( 'Applied "%s" template pack successfully.', 'checkout-fields-for-woocommerce' ),
+					__( 'Applied "%s" template pack successfully.', 'felmivo-checkout-builder' ),
 					$title
 				),
 				'success'
@@ -222,17 +222,17 @@ final class FieldTemplateRepository {
 	private static function getLocalDeliveryTemplate(): array {
 		return array(
 			'id'          => self::LOCAL_DELIVERY,
-			'title'       => __( 'Local Delivery', 'checkout-fields-for-woocommerce' ),
-			'description' => __( 'Collect delivery date, preferred time slot, and special drop-off instructions for local courier dispatch.', 'checkout-fields-for-woocommerce' ),
+			'title'       => __( 'Local Delivery', 'felmivo-checkout-builder' ),
+			'description' => __( 'Collect delivery date, preferred time slot, and special drop-off instructions for local courier dispatch.', 'felmivo-checkout-builder' ),
 			'fields'      => array(
 				array(
 					'id'           => 'preferred_date',
-					'label'        => __( 'Preferred Delivery Date', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Preferred Delivery Date', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::DATE->value,
 					'required'     => false,
 					'enabled'      => true,
 					'placeholder'  => 'YYYY-MM-DD',
-					'description'  => __( 'Select the best date to receive your order.', 'checkout-fields-for-woocommerce' ),
+					'description'  => __( 'Select the best date to receive your order.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -241,17 +241,17 @@ final class FieldTemplateRepository {
 				),
 				array(
 					'id'           => 'delivery_time_slot',
-					'label'        => __( 'Delivery Time Slot', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Delivery Time Slot', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::SELECT->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'Select a time slot', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Choose your preferred delivery window.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'Select a time slot', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Choose your preferred delivery window.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(
-						__( 'Morning', 'checkout-fields-for-woocommerce' ),
-						__( 'Afternoon', 'checkout-fields-for-woocommerce' ),
-						__( 'Evening', 'checkout-fields-for-woocommerce' ),
+						__( 'Morning', 'felmivo-checkout-builder' ),
+						__( 'Afternoon', 'felmivo-checkout-builder' ),
+						__( 'Evening', 'felmivo-checkout-builder' ),
 					),
 					'destinations' => FieldDestination::all(),
 					'conditions'   => null,
@@ -259,12 +259,12 @@ final class FieldTemplateRepository {
 				),
 				array(
 					'id'           => 'delivery_instructions',
-					'label'        => __( 'Delivery Instructions', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Delivery Instructions', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::TEXTAREA->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'Gate code, safe drop location, or special notes...', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Provide special notes for the courier.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'Gate code, safe drop location, or special notes...', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Provide special notes for the courier.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -283,17 +283,17 @@ final class FieldTemplateRepository {
 	private static function getGiftingTemplate(): array {
 		return array(
 			'id'          => self::GIFTING,
-			'title'       => __( 'Gifting', 'checkout-fields-for-woocommerce' ),
-			'description' => __( 'Allow buyers to request gift wrapping, write a personalized gift message, and specify the recipient name.', 'checkout-fields-for-woocommerce' ),
+			'title'       => __( 'Gifting', 'felmivo-checkout-builder' ),
+			'description' => __( 'Allow buyers to request gift wrapping, write a personalized gift message, and specify the recipient name.', 'felmivo-checkout-builder' ),
 			'fields'      => array(
 				array(
 					'id'           => 'gift_wrapping',
-					'label'        => __( 'Gift Wrapping', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Gift Wrapping', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::CHECKBOX->value,
 					'required'     => false,
 					'enabled'      => true,
 					'placeholder'  => '',
-					'description'  => __( 'Check if this order is a gift requiring decorative packaging.', 'checkout-fields-for-woocommerce' ),
+					'description'  => __( 'Check if this order is a gift requiring decorative packaging.', 'felmivo-checkout-builder' ),
 					'default'      => '0',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -302,12 +302,12 @@ final class FieldTemplateRepository {
 				),
 				array(
 					'id'           => 'gift_message',
-					'label'        => __( 'Gift Message', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Gift Message', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::TEXTAREA->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'Write a personalized note for the recipient...', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Included in a gift card with the shipment.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'Write a personalized note for the recipient...', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Included in a gift card with the shipment.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -320,12 +320,12 @@ final class FieldTemplateRepository {
 				),
 				array(
 					'id'           => 'recipient_name',
-					'label'        => __( 'Recipient Name', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Recipient Name', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::TEXT->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'Recipient Full Name', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Name of the person receiving the gift.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'Recipient Full Name', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Name of the person receiving the gift.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -344,17 +344,17 @@ final class FieldTemplateRepository {
 	private static function getB2bWholesaleTemplate(): array {
 		return array(
 			'id'          => self::B2B_WHOLESALE,
-			'title'       => __( 'B2B / Wholesale', 'checkout-fields-for-woocommerce' ),
-			'description' => __( 'Capture company name, tax registration/VAT number, and internal purchase order references for business buyers.', 'checkout-fields-for-woocommerce' ),
+			'title'       => __( 'B2B / Wholesale', 'felmivo-checkout-builder' ),
+			'description' => __( 'Capture company name, tax registration/VAT number, and internal purchase order references for business buyers.', 'felmivo-checkout-builder' ),
 			'fields'      => array(
 				array(
 					'id'           => 'company_name',
-					'label'        => __( 'Company Name', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Company Name', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::TEXT->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'e.g. Acme Corp Ltd.', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Registered business entity name.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'e.g. Acme Corp Ltd.', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Registered business entity name.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -363,12 +363,12 @@ final class FieldTemplateRepository {
 				),
 				array(
 					'id'           => 'tax_vat_number',
-					'label'        => __( 'Tax / VAT Number', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Tax / VAT Number', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::TEXT->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'e.g. GB123456789 or Tax ID', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Business tax identification number for invoice issuance.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'e.g. GB123456789 or Tax ID', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Business tax identification number for invoice issuance.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -377,12 +377,12 @@ final class FieldTemplateRepository {
 				),
 				array(
 					'id'           => 'po_reference',
-					'label'        => __( 'Purchase Order Reference', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Purchase Order Reference', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::TEXT->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'e.g. PO-98421', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Internal reference for procurement matching.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'e.g. PO-98421', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Internal reference for procurement matching.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -401,17 +401,17 @@ final class FieldTemplateRepository {
 	private static function getDirectContactTemplate(): array {
 		return array(
 			'id'          => self::DIRECT_CONTACT,
-			'title'       => __( 'Direct Contact', 'checkout-fields-for-woocommerce' ),
-			'description' => __( 'Provide an alternative phone line and ask customers for their preferred communication channel.', 'checkout-fields-for-woocommerce' ),
+			'title'       => __( 'Direct Contact', 'felmivo-checkout-builder' ),
+			'description' => __( 'Provide an alternative phone line and ask customers for their preferred communication channel.', 'felmivo-checkout-builder' ),
 			'fields'      => array(
 				array(
 					'id'           => 'alt_phone',
-					'label'        => __( 'Alternative Phone', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Alternative Phone', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::TEL->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( '+1 (555) 000-0000', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'Secondary phone number if primary recipient is unreachable.', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( '+1 (555) 000-0000', 'felmivo-checkout-builder' ),
+					'description'  => __( 'Secondary phone number if primary recipient is unreachable.', 'felmivo-checkout-builder' ),
 					'default'      => '',
 					'options'      => array(),
 					'destinations' => FieldDestination::all(),
@@ -420,17 +420,17 @@ final class FieldTemplateRepository {
 				),
 				array(
 					'id'           => 'contact_channel',
-					'label'        => __( 'Preferred Contact Method', 'checkout-fields-for-woocommerce' ),
+					'label'        => __( 'Preferred Contact Method', 'felmivo-checkout-builder' ),
 					'type'         => FieldType::SELECT->value,
 					'required'     => false,
 					'enabled'      => true,
-					'placeholder'  => __( 'Choose contact method', 'checkout-fields-for-woocommerce' ),
-					'description'  => __( 'How should we reach out regarding your shipment?', 'checkout-fields-for-woocommerce' ),
+					'placeholder'  => __( 'Choose contact method', 'felmivo-checkout-builder' ),
+					'description'  => __( 'How should we reach out regarding your shipment?', 'felmivo-checkout-builder' ),
 					'default'      => 'WhatsApp',
 					'options'      => array(
-						__( 'WhatsApp', 'checkout-fields-for-woocommerce' ),
-						__( 'SMS', 'checkout-fields-for-woocommerce' ),
-						__( 'Email', 'checkout-fields-for-woocommerce' ),
+						__( 'WhatsApp', 'felmivo-checkout-builder' ),
+						__( 'SMS', 'felmivo-checkout-builder' ),
+						__( 'Email', 'felmivo-checkout-builder' ),
 					),
 					'destinations' => FieldDestination::all(),
 					'conditions'   => null,

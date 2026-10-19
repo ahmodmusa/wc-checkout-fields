@@ -115,8 +115,7 @@ final class OrderDisplay {
 			return;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verification string.
-		if ( empty( $_POST[ self::NONCE_NAME ] ) || ! wp_verify_nonce( wp_unslash( $_POST[ self::NONCE_NAME ] ), self::NONCE_ACTION ) ) {
+		if ( empty( $_POST[ self::NONCE_NAME ] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ self::NONCE_NAME ] ) ), self::NONCE_ACTION ) ) {
 			return;
 		}
 
@@ -239,14 +238,14 @@ final class OrderDisplay {
 					<div class="scfw-admin-order-fields-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
 						<h3 style="margin:0; font-size:14px; font-weight:600; color:#1d2327; display:flex; align-items:center; gap:6px;">
 							<span class="dashicons dashicons-clipboard" style="font-size:18px; width:18px; height:18px; color:#5925dc;" aria-hidden="true"></span>
-							<?php esc_html_e( 'Checkout Fields', 'checkout-fields-for-woocommerce' ); ?>
+							<?php esc_html_e( 'Checkout Fields', 'felmivo-checkout-builder' ); ?>
 						</h3>
 						<div class="scfw-admin-order-fields-actions">
 							<a href="#" class="scfw-edit-order-fields-btn" role="button" style="text-decoration:none; font-weight:600; font-size:13px; color:#2271b1;">
-								<?php esc_html_e( 'Edit', 'checkout-fields-for-woocommerce' ); ?>
+								<?php esc_html_e( 'Edit', 'felmivo-checkout-builder' ); ?>
 							</a>
 							<a href="#" class="scfw-cancel-order-fields-btn" role="button" style="text-decoration:none; font-weight:600; font-size:13px; color:#646970; display:none;">
-								<?php esc_html_e( 'Cancel', 'checkout-fields-for-woocommerce' ); ?>
+								<?php esc_html_e( 'Cancel', 'felmivo-checkout-builder' ); ?>
 							</a>
 						</div>
 					</div>
@@ -270,7 +269,7 @@ final class OrderDisplay {
 							</table>
 						<?php else : ?>
 							<p style="padding:12px 16px; margin:0; color:#646970; font-style:italic;">
-								<?php esc_html_e( 'No checkout field values recorded for this order.', 'checkout-fields-for-woocommerce' ); ?>
+								<?php esc_html_e( 'No checkout field values recorded for this order.', 'felmivo-checkout-builder' ); ?>
 							</p>
 						<?php endif; ?>
 					</div>
@@ -315,7 +314,7 @@ final class OrderDisplay {
 												name="<?php echo esc_attr( $name_attr ); ?>"
 												id="<?php echo esc_attr( $input_id ); ?>"
 												style="width:100%; max-width:400px; box-sizing:border-box;">
-												<option value=""><?php esc_html_e( '-- Select an option --', 'checkout-fields-for-woocommerce' ); ?></option>
+												<option value=""><?php esc_html_e( '-- Select an option --', 'felmivo-checkout-builder' ); ?></option>
 												<?php foreach ( $field->getOptions() as $opt ) : ?>
 													<option value="<?php echo esc_attr( $opt ); ?>" <?php selected( $raw_value, $opt ); ?>>
 														<?php echo esc_html( $opt ); ?>

@@ -86,7 +86,7 @@ final class OrderMyAccount {
 	private static function output( array $rows ): void {
 		?>
 		<section class="woocommerce-order-details scfw-myaccount-section">
-			<h2 class="woocommerce-order-details__title scfw-myaccount-title"><?php esc_html_e( 'Additional Details', 'checkout-fields-for-woocommerce' ); ?></h2>
+			<h2 class="woocommerce-order-details__title scfw-myaccount-title"><?php esc_html_e( 'Additional Details', 'felmivo-checkout-builder' ); ?></h2>
 			<div class="scfw-order-fields-card">
 				<table class="woocommerce-table scfw-order-fields-table">
 					<tbody>

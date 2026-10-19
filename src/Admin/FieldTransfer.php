@@ -68,38 +68,38 @@ final class FieldTransfer {
 			<section class="scfw-card" aria-labelledby="scfw-export-heading">
 				<h2 class="scfw-card-title" id="scfw-export-heading">
 					<span class="dashicons dashicons-download" aria-hidden="true"></span>
-					<?php esc_html_e( 'Export Configuration', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Export Configuration', 'felmivo-checkout-builder' ); ?>
 				</h2>
 				<p class="scfw-card-desc">
-					<?php esc_html_e( 'Download the current checkout field configuration, including the global enabled state, as a JSON file that can be imported on another installation.', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Download the current checkout field configuration, including the global enabled state, as a JSON file that can be imported on another installation.', 'felmivo-checkout-builder' ); ?>
 				</p>
 				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<?php wp_nonce_field( 'scfw_export' ); ?>
 					<input type="hidden" name="action" value="scfw_export" />
-					<?php submit_button( __( 'Export Configuration', 'checkout-fields-for-woocommerce' ), 'primary', 'scfw_export', false ); ?>
+					<?php submit_button( __( 'Export Configuration', 'felmivo-checkout-builder' ), 'primary', 'scfw_export', false ); ?>
 				</form>
 			</section>
 
 			<section class="scfw-card scfw-card--caution" aria-labelledby="scfw-import-heading">
 				<h2 class="scfw-card-title" id="scfw-import-heading">
 					<span class="dashicons dashicons-upload" aria-hidden="true"></span>
-					<?php esc_html_e( 'Import Configuration', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Import Configuration', 'felmivo-checkout-builder' ); ?>
 				</h2>
 				<p class="scfw-card-desc">
-					<?php esc_html_e( 'Import a previously exported configuration file to replace the current fields.', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Import a previously exported configuration file to replace the current fields.', 'felmivo-checkout-builder' ); ?>
 				</p>
 				<p class="scfw-caution">
 					<span class="dashicons dashicons-warning" aria-hidden="true"></span>
-					<?php esc_html_e( 'Importing replaces your current field configuration. Export a backup first if you want to keep the current fields.', 'checkout-fields-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Importing replaces your current field configuration. Export a backup first if you want to keep the current fields.', 'felmivo-checkout-builder' ); ?>
 				</p>
 				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" enctype="multipart/form-data">
 					<?php wp_nonce_field( 'scfw_import' ); ?>
 					<input type="hidden" name="action" value="scfw_import" />
 					<label for="scfw-import-file">
-						<?php esc_html_e( 'Choose a configuration file', 'checkout-fields-for-woocommerce' ); ?>
+						<?php esc_html_e( 'Choose a configuration file', 'felmivo-checkout-builder' ); ?>
 					</label>
 					<input type="file" id="scfw-import-file" name="scfw_import_file" accept="application/json" required />
-					<?php submit_button( __( 'Import Configuration', 'checkout-fields-for-woocommerce' ), 'secondary', 'scfw_import', false ); ?>
+					<?php submit_button( __( 'Import Configuration', 'felmivo-checkout-builder' ), 'secondary', 'scfw_import', false ); ?>
 				</form>
 			</section>
 		</div>
@@ -115,7 +115,7 @@ final class FieldTransfer {
 	 */
 	public static function export(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to export the configuration.', 'checkout-fields-for-woocommerce' ) );
+			wp_die( esc_html__( 'You do not have permission to export the configuration.', 'felmivo-checkout-builder' ) );
 		}
 
 		check_admin_referer( 'scfw_export' );
@@ -129,7 +129,7 @@ final class FieldTransfer {
 		$json = wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 
 		if ( false === $json ) {
-			self::redirect( 'export_failed', __( 'The configuration could not be encoded.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'export_failed', __( 'The configuration could not be encoded.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		nocache_headers();
@@ -153,7 +153,7 @@ final class FieldTransfer {
 	 */
 	public static function import(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to import the configuration.', 'checkout-fields-for-woocommerce' ) );
+			wp_die( esc_html__( 'You do not have permission to import the configuration.', 'felmivo-checkout-builder' ) );
 		}
 
 		check_admin_referer( 'scfw_import' );
@@ -161,43 +161,43 @@ final class FieldTransfer {
 		$file = $_FILES['scfw_import_file'] ?? array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( ! is_array( $file ) || ( $file['error'] ?? UPLOAD_ERR_NO_FILE ) !== UPLOAD_ERR_OK ) {
-			self::redirect( 'import_failed', __( 'The configuration file upload failed.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'import_failed', __( 'The configuration file upload failed.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		$tmp_name = isset( $file['tmp_name'] ) && is_string( $file['tmp_name'] ) ? $file['tmp_name'] : '';
 		$filename = isset( $file['name'] ) && is_scalar( $file['name'] ) ? sanitize_file_name( (string) $file['name'] ) : '';
 
 		if ( '' === $tmp_name || ! is_uploaded_file( $tmp_name ) || ! file_exists( $tmp_name ) || ! is_readable( $tmp_name ) ) {
-			self::redirect( 'import_failed', __( 'The uploaded configuration file could not be read.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'import_failed', __( 'The uploaded configuration file could not be read.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		$file_type = wp_check_filetype( $filename, array( 'json' => 'application/json' ) );
 
 		if ( ! is_array( $file_type ) || 'json' !== ( $file_type['ext'] ?? '' ) ) {
-			self::redirect( 'import_failed', __( 'Only valid JSON configuration files can be imported.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'import_failed', __( 'Only valid JSON configuration files can be imported.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		$content = file_get_contents( $tmp_name ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$data    = json_decode( (string) $content, true );
 
 		if ( false === $content || JSON_ERROR_NONE !== json_last_error() || ! is_array( $data ) || ( $data['format'] ?? '' ) !== self::FORMAT ) {
-			self::redirect( 'import_failed', __( 'The uploaded file is not a valid configuration export.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'import_failed', __( 'The uploaded file is not a valid configuration export.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		if ( array_diff( array( 'format', 'enabled', 'fields' ), array_keys( $data ) ) || ! self::isBooleanValue( $data['enabled'] ) ) {
-			self::redirect( 'import_failed', __( 'The uploaded configuration has an invalid structure.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'import_failed', __( 'The uploaded configuration has an invalid structure.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		$imported = $data['fields'] ?? null;
 
 		if ( ! is_array( $imported ) ) {
-			self::redirect( 'import_failed', __( 'The uploaded configuration does not contain any valid fields.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'import_failed', __( 'The uploaded configuration does not contain any valid fields.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		$fields = self::validatedFields( $imported );
 
 		if ( null === $fields ) {
-			self::redirect( 'import_failed', __( 'The uploaded configuration contains invalid fields and was rejected.', 'checkout-fields-for-woocommerce' ), 'error' );
+			self::redirect( 'import_failed', __( 'The uploaded configuration contains invalid fields and was rejected.', 'felmivo-checkout-builder' ), 'error' );
 		}
 
 		$options = get_option( self::OPTION_NAME, array() );
@@ -208,7 +208,7 @@ final class FieldTransfer {
 
 		update_option( self::OPTION_NAME, $options );
 
-		self::redirect( 'import_success', __( 'The field configuration was imported.', 'checkout-fields-for-woocommerce' ), 'success' );
+		self::redirect( 'import_success', __( 'The field configuration was imported.', 'felmivo-checkout-builder' ), 'success' );
 	}
 
 	/**

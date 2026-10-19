@@ -1,6 +1,6 @@
 {
   "name": "ahmodmusa/wc-checkout-fields",
-  "description": "Foundation repository for Checkout Fields for WooCommerce.",
+  "description": "Foundation repository for Felmivo Checkout Builder for WooCommerce.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "require": {

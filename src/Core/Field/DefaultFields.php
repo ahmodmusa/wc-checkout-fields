@@ -30,7 +30,7 @@ final class DefaultFields {
 		return array(
 			FieldFactory::create(
 				'delivery_instructions',
-				__( 'Delivery Instructions', 'checkout-fields-for-woocommerce' ),
+				__( 'Delivery Instructions', 'felmivo-checkout-builder' ),
 				FieldType::TEXTAREA
 			),
 		);

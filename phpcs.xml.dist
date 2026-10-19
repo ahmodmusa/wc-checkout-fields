@@ -12,7 +12,7 @@
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 
-	<file>./checkout-fields-for-woocommerce.php</file>
+	<file>./felmivo-checkout-builder.php</file>
 	<file>./src/</file>
 
 	<rule ref="WordPress"/>

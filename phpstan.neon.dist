@@ -4,7 +4,7 @@ includes:
 parameters:
     level: max
     paths:
-        - checkout-fields-for-woocommerce.php
+        - felmivo-checkout-builder.php
         - src/
         - tests/
     phpVersion: 80200

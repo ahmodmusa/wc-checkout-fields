@@ -1,10 +1,10 @@
-=== Checkout Fields for WooCommerce ===
-Contributors: ahmodmusa
+=== Felmivo Checkout Builder for WooCommerce ===
+Contributors: musabin
 Tags: woocommerce, checkout, fields, checkout-fields, conditional-logic
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.0.1
+Stable tag: 0.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Create checkout fields, control when they appear, decide where their data goes, 
 
 == Description ==
 
-**Checkout Fields for WooCommerce** gives store owners and developers an intuitive, reliable way to manage WooCommerce checkout fields across both Classic Checkout and modern WooCommerce Block Checkout.
+**Felmivo Checkout Builder for WooCommerce** gives store owners and developers an intuitive, reliable way to manage WooCommerce checkout fields across both Classic Checkout and modern WooCommerce Block Checkout.
 
 Create checkout fields, control when they appear, decide where their data goes, and keep the configuration healthy.
 
@@ -30,7 +30,7 @@ Create checkout fields, control when they appear, decide where their data goes, 
 
 == Installation ==
 
-1. Upload the `checkout-fields-for-woocommerce` folder to the `/wp-content/plugins/` directory, or install the plugin directly through the WordPress plugins screen.
+1. Upload the `felmivo-checkout-builder` folder to the `/wp-content/plugins/` directory, or install the plugin directly through the WordPress plugins screen.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Navigate to **WooCommerce > Checkout Fields** to start creating and customizing your checkout fields.
 
@@ -50,10 +50,18 @@ You can customize each field's destinations in the Field Settings modal to show 
 
 == Changelog ==
 
+= 0.0.2 =
+* Renamed the plugin to Felmivo Checkout Builder for WooCommerce (new slug: felmivo-checkout-builder) following WordPress.org review feedback.
+* Fixed: the nonce value is now sanitized with sanitize_text_field() before verification on the order admin screen.
+* Added the "Requires Plugins: woocommerce" plugin header.
+
 = 0.0.1 =
 * Initial release featuring Field Builder, 9 supported field types, Conditional Visibility, Data Destinations, Use-Case Templates, Checkout Health Engine, Live Field Preview, and Developer Diagnostics.
 
 == Upgrade Notice ==
+
+= 0.0.2 =
+Version 0.0.2 renames the plugin to Felmivo Checkout Builder for WooCommerce and addresses WordPress.org review feedback; settings and field configurations are unchanged.
 
 = 0.0.1 =
 Initial release for Checkout Fields for WooCommerce.

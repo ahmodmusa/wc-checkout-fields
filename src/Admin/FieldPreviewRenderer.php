@@ -30,7 +30,7 @@ final class FieldPreviewRenderer {
 	 */
 	public static function render( array $field ): string {
 		$id          = (string) ( $field['id'] ?? 'preview_field' );
-		$label       = (string) ( $field['label'] ?? __( 'Untitled Field', 'checkout-fields-for-woocommerce' ) );
+		$label       = (string) ( $field['label'] ?? __( 'Untitled Field', 'felmivo-checkout-builder' ) );
 		$type        = (string) ( $field['type'] ?? 'text' );
 		$required    = ! empty( $field['required'] );
 		$enabled     = ! isset( $field['enabled'] ) || ! empty( $field['enabled'] );
@@ -48,15 +48,15 @@ final class FieldPreviewRenderer {
 		<div class="scfw-live-preview-box<?php echo $enabled ? '' : ' scfw-preview--disabled'; ?>" data-preview-for="<?php echo \esc_attr( $id ); ?>">
 			<div class="scfw-preview-header">
 				<div class="scfw-preview-meta-left">
-					<span class="scfw-preview-badge"><?php esc_html_e( 'Customer Checkout Preview', 'checkout-fields-for-woocommerce' ); ?></span>
+					<span class="scfw-preview-badge"><?php esc_html_e( 'Customer Checkout Preview', 'felmivo-checkout-builder' ); ?></span>
 					<?php if ( ! $enabled ) : ?>
-						<span class="scfw-preview-status-badge scfw-preview-status--disabled"><?php esc_html_e( 'Field Disabled', 'checkout-fields-for-woocommerce' ); ?></span>
+						<span class="scfw-preview-status-badge scfw-preview-status--disabled"><?php esc_html_e( 'Field Disabled', 'felmivo-checkout-builder' ); ?></span>
 					<?php endif; ?>
 				</div>
 				<?php if ( ! empty( $conditions ) && is_array( $conditions ) ) : ?>
-					<div class="scfw-preview-condition-tag" title="<?php echo \esc_attr( sprintf( /* translators: %s condition */ __( 'Condition: %s', 'checkout-fields-for-woocommerce' ), DeveloperDiagnostics::conditionSummary( $field ) ) ); ?>">
+					<div class="scfw-preview-condition-tag" title="<?php echo \esc_attr( sprintf( /* translators: %s condition */ __( 'Condition: %s', 'felmivo-checkout-builder' ), DeveloperDiagnostics::conditionSummary( $field ) ) ); ?>">
 						<span class="dashicons dashicons-randomize" aria-hidden="true" style="font-size:13px; width:13px; height:13px; line-height:1.4;"></span>
-						<span><?php echo \esc_html( sprintf( /* translators: %s is condition summary */ __( 'Conditional: %s', 'checkout-fields-for-woocommerce' ), DeveloperDiagnostics::conditionSummary( $field ) ) ); ?></span>
+						<span><?php echo \esc_html( sprintf( /* translators: %s is condition summary */ __( 'Conditional: %s', 'felmivo-checkout-builder' ), DeveloperDiagnostics::conditionSummary( $field ) ) ); ?></span>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -68,14 +68,14 @@ final class FieldPreviewRenderer {
 							<input type="checkbox" id="<?php echo \esc_attr( $preview_id ); ?>" class="input-checkbox" disabled <?php checked( ! empty( $default ), true ); ?> />
 							<span class="scfw-preview-label-text"><?php echo \esc_html( $label ); ?></span>
 							<?php if ( $required ) : ?>
-								<abbr class="required" title="<?php esc_attr_e( 'required', 'checkout-fields-for-woocommerce' ); ?>" style="color:#e11d48; margin-left:4px;">*</abbr>
+								<abbr class="required" title="<?php esc_attr_e( 'required', 'felmivo-checkout-builder' ); ?>" style="color:#e11d48; margin-left:4px;">*</abbr>
 							<?php endif; ?>
 						</label>
 					<?php else : ?>
 						<label for="<?php echo \esc_attr( $preview_id ); ?>" class="scfw-preview-label">
 							<span class="scfw-preview-label-text"><?php echo \esc_html( $label ); ?></span>
 							<?php if ( $required ) : ?>
-								<abbr class="required" title="<?php esc_attr_e( 'required', 'checkout-fields-for-woocommerce' ); ?>" style="color:#e11d48; margin-left:4px;">*</abbr>
+								<abbr class="required" title="<?php esc_attr_e( 'required', 'felmivo-checkout-builder' ); ?>" style="color:#e11d48; margin-left:4px;">*</abbr>
 							<?php endif; ?>
 						</label>
 
@@ -87,7 +87,7 @@ final class FieldPreviewRenderer {
 									<option value=""><?php echo \esc_html( $placeholder ); ?></option>
 								<?php endif; ?>
 								<?php if ( empty( $options ) ) : ?>
-									<option value=""><?php esc_html_e( 'No options configured yet.', 'checkout-fields-for-woocommerce' ); ?></option>
+									<option value=""><?php esc_html_e( 'No options configured yet.', 'felmivo-checkout-builder' ); ?></option>
 								<?php else : ?>
 									<?php foreach ( $options as $opt ) : ?>
 										<?php $optStr = (string) $opt; ?>
@@ -98,7 +98,7 @@ final class FieldPreviewRenderer {
 						<?php elseif ( 'radio' === $type ) : ?>
 							<div class="scfw-preview-radio-group">
 								<?php if ( empty( $options ) ) : ?>
-									<p class="scfw-preview-empty-notice"><?php esc_html_e( 'No options configured yet.', 'checkout-fields-for-woocommerce' ); ?></p>
+									<p class="scfw-preview-empty-notice"><?php esc_html_e( 'No options configured yet.', 'felmivo-checkout-builder' ); ?></p>
 								<?php else : ?>
 									<?php foreach ( $options as $rIdx => $opt ) : ?>
 										<?php $optStr = (string) $opt; ?>
