@@ -48,7 +48,7 @@ final class AdminMenu {
 		$hook = add_submenu_page(
 			'woocommerce',
 			__( 'Felmivo Checkout Builder for WooCommerce', 'felmivo-checkout-builder' ),
-			__( 'Felmivo Checkout Builder for WooCommerce', 'felmivo-checkout-builder' ),
+			__( 'Felmivo Checkout', 'felmivo-checkout-builder' ),
 			'manage_options',
 			'scfw-fields',
 			array( self::class, 'renderPage' )
